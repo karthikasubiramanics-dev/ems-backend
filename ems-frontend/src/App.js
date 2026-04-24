@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [employees, setEmployees] = useState([]);
@@ -6,13 +6,13 @@ function App() {
   useEffect(() => {
     fetch("https://ems-backend-l4vn.onrender.com/api/employees")
       .then((res) => res.json())
-      .then((response) => {
-        console.log("API RESPONSE:", response);
+      .then((result) => {
+        console.log("API RESPONSE:", result);
 
-        // ✅ DIRECT FIX
-        setEmployees(response.data || []);
+        // ✅ IMPORTANT FIX HERE
+        setEmployees(result.data);
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((err) => console.error("Error:", err));
   }, []);
 
   return (
