@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// ✅ VERY IMPORTANT (CORS FIX)
+@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/api/employees")
-
 @Tag(name = "Employee API", description = "Employee Management APIs")
 public class EmployeeController {
 
