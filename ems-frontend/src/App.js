@@ -5,27 +5,47 @@ function App() {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // Deployed backend URL
   const BASE_URL = "https://ems-backend-l4vn.onrender.com";
 
-  // Fetch employees after login
+  // Fetch Employees
   useEffect(() => {
     if (isLoggedIn) {
-      fetch(`${BASE_URL}/api/employees`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setEmployees(data.data || []);
-        })
-        .catch((error) => {
-          console.error("Error fetching employees:", error);
-          alert("Failed to load employees");
-        });
+      fetchEmployees();
     }
   }, [isLoggedIn]);
 
-  // Login function
+  const fetchEmployees = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch(`${BASE_URL}/api/employees`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const result = await response.json();
+
+      console.log("EMPLOYEE RESPONSE:", result);
+
+      if (result.status === "SUCCESS") {
+        setEmployees(result.data);
+      } else {
+        setEmployees([]);
+      }
+
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      alert("Failed to fetch employees");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Login
   const handleLogin = async () => {
     try {
       const response = await fetch(`${BASE_URL}/api/auth/login`, {
@@ -40,29 +60,33 @@ function App() {
       });
 
       const result = await response.json();
-      console.log(result);
+
+      console.log("LOGIN RESPONSE:", result);
 
       if (result.message === "Login successful") {
-        alert("Login Success");
+        alert("Login Success ✅");
         setIsLoggedIn(true);
       } else {
-        alert("Invalid Login");
+        alert(result.message);
       }
 
     } catch (error) {
-      console.error(error);
+      console.error("Login Error:", error);
       alert("Server Error");
     }
   };
 
-  // After login → Show employee table
+  // Employee Table Page
   if (isLoggedIn) {
     return (
       <div style={{ padding: "20px" }}>
         <h1>Employee Management System</h1>
-        <h2>Employee List</h2>
+        <h2>Welcome Admin ✅</h2>
+        <h3>Employee List</h3>
 
-        {employees.length === 0 ? (
+        {loading ? (
+          <p>Loading employees...</p>
+        ) : employees.length === 0 ? (
           <p>No employees found</p>
         ) : (
           <table border="1" cellPadding="10" cellSpacing="0">
@@ -93,7 +117,7 @@ function App() {
     );
   }
 
-  // Login page
+  // Login Page
   return (
     <div style={{ textAlign: "center", marginTop: "100px" }}>
       <h2>Employee Management Login</h2>
@@ -104,9 +128,7 @@ function App() {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-
-      <br />
-      <br />
+      <br /><br />
 
       <input
         type="password"
@@ -114,9 +136,7 @@ function App() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-
-      <br />
-      <br />
+      <br /><br />
 
       <button onClick={handleLogin}>
         Login
