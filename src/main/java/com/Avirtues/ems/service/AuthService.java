@@ -1,4 +1,4 @@
 package com.Avirtues.ems.service;
 
-public class EmployeeService {
+public class AuthService {
 }

@@ -1,4 +1,4 @@
 package com.Avirtues.ems.repository;
 
-public class EmployeeRepository {
+public class UserRepository {
 }

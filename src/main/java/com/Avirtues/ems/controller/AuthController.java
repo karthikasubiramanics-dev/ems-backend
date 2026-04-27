@@ -1,4 +1,4 @@
 package com.Avirtues.ems.controller;
 
-public class EmployeeController {
+public class AuthController {
 }
