@@ -1,7 +1,7 @@
 package com.Avirtues.ems.controller;
 
 import com.Avirtues.ems.dto.ApiResponse;
-import com.Avirtues.ems.entity.Employee;
+import com.Avirtues.ems.dto.EmployeeDTO;
 import com.Avirtues.ems.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +21,9 @@ public class EmployeeController {
 
     // GET ALL EMPLOYEES
     @GetMapping
-    public ApiResponse<List<Employee>> getAllEmployees() {
+    public ApiResponse<List<EmployeeDTO>> getAllEmployees() {
 
-        List<Employee> employees = employeeService.getAllEmployees();
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
 
         return new ApiResponse<>(
                 "SUCCESS",
@@ -32,11 +32,14 @@ public class EmployeeController {
         );
     }
 
-    // CREATE NEW EMPLOYEE
+    // CREATE EMPLOYEE
     @PostMapping
-    public ApiResponse<Employee> createEmployee(@RequestBody Employee employee) {
+    public ApiResponse<EmployeeDTO> createEmployee(
+            @RequestBody EmployeeDTO employeeDTO
+    ) {
 
-        Employee savedEmployee = employeeService.saveEmployee(employee);
+        EmployeeDTO savedEmployee =
+                employeeService.createEmployee(employeeDTO);
 
         return new ApiResponse<>(
                 "SUCCESS",
@@ -47,9 +50,12 @@ public class EmployeeController {
 
     // GET EMPLOYEE BY ID
     @GetMapping("/{id}")
-    public ApiResponse<Employee> getEmployeeById(@PathVariable Long id) {
+    public ApiResponse<EmployeeDTO> getEmployeeById(
+            @PathVariable Long id
+    ) {
 
-        Employee employee = employeeService.getEmployeeById(id);
+        EmployeeDTO employee =
+                employeeService.getEmployeeById(id);
 
         return new ApiResponse<>(
                 "SUCCESS",
@@ -60,12 +66,13 @@ public class EmployeeController {
 
     // UPDATE EMPLOYEE
     @PutMapping("/{id}")
-    public ApiResponse<Employee> updateEmployee(
+    public ApiResponse<EmployeeDTO> updateEmployee(
             @PathVariable Long id,
-            @RequestBody Employee employee
+            @RequestBody EmployeeDTO employeeDTO
     ) {
 
-        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+        EmployeeDTO updatedEmployee =
+                employeeService.updateEmployee(id, employeeDTO);
 
         return new ApiResponse<>(
                 "SUCCESS",
@@ -76,7 +83,9 @@ public class EmployeeController {
 
     // DELETE EMPLOYEE
     @DeleteMapping("/{id}")
-    public ApiResponse<String> deleteEmployee(@PathVariable Long id) {
+    public ApiResponse<String> deleteEmployee(
+            @PathVariable Long id
+    ) {
 
         employeeService.deleteEmployee(id);
 

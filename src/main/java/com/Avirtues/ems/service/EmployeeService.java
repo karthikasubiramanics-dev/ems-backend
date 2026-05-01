@@ -1,30 +1,18 @@
+// EmployeeService.java
 package com.Avirtues.ems.service;
 
 import com.Avirtues.ems.dto.EmployeeDTO;
-
 import java.util.List;
 
 public interface EmployeeService {
 
-    EmployeeDTO saveEmployee(EmployeeDTO dto);
+    EmployeeDTO createEmployee(EmployeeDTO employeeDTO);
 
     List<EmployeeDTO> getAllEmployees();
 
-    EmployeeDTO getEmployeeById(Long id);
+    EmployeeDTO getEmployeeById(Long employeeId);
 
-    EmployeeDTO updateEmployee(Long id, EmployeeDTO dto);
+    EmployeeDTO updateEmployee(Long employeeId, EmployeeDTO updatedEmployee);
 
-    void deleteEmployee(Long id);
-
-    List<EmployeeDTO> getEmployeesWithPagination(
-            int page,
-            int size,
-            String sortBy,
-            String direction
-    );
-
-    List<EmployeeDTO> searchEmployees(
-            String name,
-            String department
-    );
+    void deleteEmployee(Long employeeId);
 }
