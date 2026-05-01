@@ -17,9 +17,7 @@ public class Employee {
 
     // Getter + Setter for First Name
     // Changed from name → firstName + lastName
-    private String firstName;
-    // Getter + Setter for Last Name
-    private String lastName;
+    private String name;
 
     // Getter + Setter for Email
     private String email;
@@ -35,11 +33,10 @@ public class Employee {
     }
 
     // Constructor
-    public Employee(Long id, String firstName, String lastName,
+    public Employee(Long id, String name,
                     String email, String department, double salary) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.email = email;
         this.department = department;
         this.salary = salary;

@@ -25,8 +25,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
 
-        employee.setFirstName(employeeDTO.getFirstName());
-        employee.setLastName(employeeDTO.getLastName());
+        employee.setName(employeeDTO.getName());
+       // employee.setLastName(employeeDTO.getLastName());
         employee.setEmail(employeeDTO.getEmail());
         employee.setDepartment(employeeDTO.getDepartment());
         employee.setSalary(employeeDTO.getSalary());
@@ -60,8 +60,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee not found with id: " + employeeId));
 
-        employee.setFirstName(updatedEmployee.getFirstName());
-        employee.setLastName(updatedEmployee.getLastName());
+        employee.setName(updatedEmployee.getName());
+        //employee.setLastName(updatedEmployee.getLastName());
         employee.setEmail(updatedEmployee.getEmail());
         employee.setDepartment(updatedEmployee.getDepartment());
         employee.setSalary(updatedEmployee.getSalary());

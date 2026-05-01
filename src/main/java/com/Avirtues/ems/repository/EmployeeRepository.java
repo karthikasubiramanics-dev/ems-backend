@@ -9,15 +9,15 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    // Search by first name
-    List<Employee> findByFirstNameContainingIgnoreCase(String firstName);
+    // Search by name
+    List<Employee> findByNameContainingIgnoreCase(String name);
 
     // Search by department
     List<Employee> findByDepartmentContainingIgnoreCase(String department);
 
-    // Search by first name + department
-    List<Employee> findByFirstNameContainingIgnoreCaseAndDepartmentContainingIgnoreCase(
-            String firstName,
+    // Search by name + department
+    List<Employee> findByNameContainingIgnoreCaseAndDepartmentContainingIgnoreCase(
+            String name,
             String department
     );
 }

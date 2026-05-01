@@ -13,13 +13,9 @@ public class EmployeeDTO {
 
     private Long id;
 
-    // Changed from name → firstName + lastName
-    private String firstName;
-    private String lastName;
 
+    private String name;
     private String email;
-
-    // Added missing fields
     private String department;
     private double salary;
 }
