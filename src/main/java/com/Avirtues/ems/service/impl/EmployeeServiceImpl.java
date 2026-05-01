@@ -1,4 +1,3 @@
-// EmployeeServiceImpl.java
 package com.Avirtues.ems.service.impl;
 
 import com.Avirtues.ems.dto.EmployeeDTO;
@@ -6,7 +5,6 @@ import com.Avirtues.ems.entity.Employee;
 import com.Avirtues.ems.exception.ResourceNotFoundException;
 import com.Avirtues.ems.repository.EmployeeRepository;
 import com.Avirtues.ems.service.EmployeeService;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +23,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = mapper.map(employeeDTO, Employee.class);
+        Employee employee = new Employee();
+
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
+        employee.setEmail(employeeDTO.getEmail());
+        employee.setDepartment(employeeDTO.getDepartment());
+        employee.setSalary(employeeDTO.getSalary());
+
         Employee savedEmployee = repository.save(employee);
+
         return mapper.map(savedEmployee, EmployeeDTO.class);
     }
 
@@ -57,6 +63,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setFirstName(updatedEmployee.getFirstName());
         employee.setLastName(updatedEmployee.getLastName());
         employee.setEmail(updatedEmployee.getEmail());
+        employee.setDepartment(updatedEmployee.getDepartment());
+        employee.setSalary(updatedEmployee.getSalary());
 
         Employee savedEmployee = repository.save(employee);
 
