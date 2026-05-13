@@ -10,25 +10,16 @@ import lombok.Setter;
 @Table(name = "employees")
 public class Employee {
 
-    // Getter + Setter for ID
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // Getter + Setter for First Name
-    // Changed from name → firstName + lastName
     private String name;
-
-    // Getter + Setter for Email
+    private String phoneNumber;
     private String email;
-
-    // Getter + Setter for Department
-    // Keeping your existing fields
     private String department;
-    // Getter + Setter for Salary
     private double salary;
 
-    // Default Constructor
     public Employee() {
     }
 

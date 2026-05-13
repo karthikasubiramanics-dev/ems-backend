@@ -3,6 +3,9 @@ package com.Avirtues.ems.controller;
 import com.Avirtues.ems.dto.ApiResponse;
 import com.Avirtues.ems.dto.EmployeeDTO;
 import com.Avirtues.ems.service.EmployeeService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +22,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    // GET ALL EMPLOYEES
+    // ✅ GET ALL EMPLOYEES
     @GetMapping
     public ApiResponse<List<EmployeeDTO>> getAllEmployees() {
 
@@ -32,10 +35,10 @@ public class EmployeeController {
         );
     }
 
-    // CREATE EMPLOYEE
+    // ✅ CREATE EMPLOYEE (WITH VALIDATION)
     @PostMapping
     public ApiResponse<EmployeeDTO> createEmployee(
-            @RequestBody EmployeeDTO employeeDTO
+            @Valid @RequestBody EmployeeDTO employeeDTO
     ) {
 
         EmployeeDTO savedEmployee =
@@ -48,7 +51,7 @@ public class EmployeeController {
         );
     }
 
-    // GET EMPLOYEE BY ID
+    // ✅ GET EMPLOYEE BY ID
     @GetMapping("/{id}")
     public ApiResponse<EmployeeDTO> getEmployeeById(
             @PathVariable Long id
@@ -64,11 +67,11 @@ public class EmployeeController {
         );
     }
 
-    // UPDATE EMPLOYEE
+    // ✅ UPDATE EMPLOYEE (WITH VALIDATION)
     @PutMapping("/{id}")
     public ApiResponse<EmployeeDTO> updateEmployee(
             @PathVariable Long id,
-            @RequestBody EmployeeDTO employeeDTO
+            @Valid @RequestBody EmployeeDTO employeeDTO
     ) {
 
         EmployeeDTO updatedEmployee =
@@ -81,7 +84,7 @@ public class EmployeeController {
         );
     }
 
-    // DELETE EMPLOYEE
+    // ✅ DELETE EMPLOYEE
     @DeleteMapping("/{id}")
     public ApiResponse<String> deleteEmployee(
             @PathVariable Long id
